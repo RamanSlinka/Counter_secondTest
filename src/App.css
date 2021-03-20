@@ -75,3 +75,11 @@ h2 {
     font-weight: bold;
 
 }
+
+.red{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 60px;
+    font-weight: bold;
+    color: red;
+}
