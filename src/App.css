@@ -1,18 +1,77 @@
 .App {
-  text-align: center;
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    text-align: center;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #61dafb;
 }
 
 
-.App-link {
-  color: #61dafb;
+.container {
+    border: 3px solid #61dafb;
+    border-radius: 5px;
+   width: 400px;
+    min-height: 250px;
+    margin: 30px;
 }
 
 
+.setting-field {
+
+    width: 92%;
+    border: 3px solid #61dafb;
+    border-radius: 5px;
+    margin: 10px;
+    height: 140px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+
+}
+
+
+.row input {
+    outline: none;
+    height: 20px;
+    width: 120px;
+    margin: 15px 5px 17px 20px;
+    border: aqua 1px solid;
+    border-radius: 2px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.button-field {
+    margin: 10px;
+    width: 92%;
+    border: 3px solid #61dafb;
+    border-radius: 5px;
+    height: 65px;
+}
+
+button {
+    background: #61dafb;
+    margin: 19px;
+    width: 90px;
+    height: 35px;
+    border: aqua 1px solid;
+    border-radius: 2px;
+    color: #282c34;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+h2 {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 40px;
+    font-weight: bold;
+
+}
