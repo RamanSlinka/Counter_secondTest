@@ -1,8 +1,9 @@
-import React, {ChangeEventHandler} from "react";
+import React from "react";
 
 
 type SettingFieldPropsType ={
     paragraph: string
+    getValueInput:()=> void
 }
 export function SettingField (props: SettingFieldPropsType) {
 
@@ -11,7 +12,7 @@ export function SettingField (props: SettingFieldPropsType) {
         <div className={'row'}>
             <p>{props.paragraph} </p>
             <input type="number"
-                  /* onChange={inputValue}*//>
+                   onChange={props.getValueInput}/>
         </div>
     )
 }

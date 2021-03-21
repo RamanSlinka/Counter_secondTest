@@ -8,6 +8,7 @@ type ButtonPropsType = {
 
 export function Button(props: ButtonPropsType) {
     return (
-        <button onClick={props.onClick} disabled={props.disabled}>{props.title}</button>
+        <button onClick={props.onClick}
+                disabled={props.disabled}>{props.title}</button>
     )
 }

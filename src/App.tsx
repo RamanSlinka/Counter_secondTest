@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {ChangeEventHandler, useState} from 'react';
 
 import './App.css';
 import {Counter} from "./Counter";
@@ -6,12 +6,18 @@ import {CounterSetting} from "./CounterSetting";
 
 function App() {
     let [value, setValue] = useState(0)
-    const increment = () => {setValue(value + 1)}
+    let [maxValue, setMaxValue] = useState(0)
+
+
+    const increment = () => {setValue(value + 1)
+    if (value === maxValue) {
+        return maxValue
+    }}
     const resetValue = () => { setValue(0)}
 
 const setToLocalStorageHandler = () => {
         localStorage.setItem('convertValue', JSON.stringify(value))
-
+    getFormLocalStorage()
 }
 
 const getFormLocalStorage = () => {
@@ -22,10 +28,23 @@ const getFormLocalStorage = () => {
     }
 }
 
+let getMaxValueFromInput = (e:ChangeEventHandler<HTMLInputElement>) =>
+    setMaxValue(e.currentTarget.value)
+
+    let getStartValueFromInput = (e:ChangeEventHandler<HTMLInputElement>) =>
+    setValue(e.currentTarget.value)
+
+
     return (
         <div className="App">
-            <CounterSetting value={value}/>
-            <Counter value={value} increment={increment} resetValue={resetValue} />
+            <CounterSetting value={value}
+                            getMaxValueFromInput={getMaxValueFromInput}
+                            getStartValueFromInput={getStartValueFromInput}
+                            setToLocalStorageHandler={setToLocalStorageHandler}/>
+            <Counter value={value}
+                     increment={increment}
+                     resetValue={resetValue}
+                     />
         </div>
     );
 }
