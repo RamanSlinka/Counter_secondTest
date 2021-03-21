@@ -9,9 +9,18 @@ function App() {
     const increment = () => {setValue(value + 1)}
     const resetValue = () => { setValue(0)}
 
+const setToLocalStorageHandler = () => {
+        localStorage.setItem('convertValue', JSON.stringify(value))
 
+}
 
-
+const getFormLocalStorage = () => {
+        let valueAsString = localStorage.getItem('convertValue')
+    if (valueAsString) {
+        let newValue = JSON.parse(valueAsString)
+        setValue(newValue)
+    }
+}
 
     return (
         <div className="App">
