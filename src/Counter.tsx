@@ -16,9 +16,8 @@ export function Counter(props: CounterPropsType) {
                 <h2 className={props.value === props.maxValue ? 'red' : ''}>{props.value}</h2>
             </div>
             <div className={'button-field'}>
-                <Button title={'inc'} onClick={props.increment} disabled={props.value === props.maxValue} />
-                <Button title={'reset'}  onClick={props.resetValue} disabled={props.value < props.maxValue}/>
-
+                <Button title={'inc'} onClick={props.increment} disabled={false}/*disabled={props.value === props.maxValue}*/ />
+                <Button title={'reset'}  onClick={props.resetValue} disabled={false}/>
             </div>
         </div>
     )

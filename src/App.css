@@ -46,7 +46,7 @@
     font-size: 20px;
     text-align: center;
 }
- .row input-incorrect-value{
+ .row .input-incorrect-value{
      outline: none;
      height: 20px;
      width: 120px;
@@ -77,6 +77,9 @@ button {
     font-size: 20px;
     font-weight: bold;
 
+}
+button:disabled {
+    background-color: red;
 }
 
 h2 {

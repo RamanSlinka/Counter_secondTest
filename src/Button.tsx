@@ -1,4 +1,5 @@
 import React from "react";
+import './App.css'
 
 type ButtonPropsType = {
     title: string
@@ -8,7 +9,7 @@ type ButtonPropsType = {
 
 export function Button(props: ButtonPropsType) {
     return (
-        <button onClick={props.onClick}
+        <button onClick={props.onClick} className='button'
                 disabled={props.disabled}>{props.title}</button>
     )
 }
