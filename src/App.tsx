@@ -1,33 +1,45 @@
-import React, {ChangeEvent, ChangeEventHandler, useState} from 'react';
+import React, {useState} from 'react';
 
 import './App.css';
 import {Counter} from "./Counter";
 import {CounterSetting} from "./CounterSetting";
 
 function App() {
-    let [value, setValue] = useState<number>(0)                     // значение передаваемое на экран счётчика
-    let [maxValue, setMaxValue] = useState<number>(0)            // значения макс. (input1)
-    let [startValue, setStartValue] = useState<number>(0)            // значения стартовые (input2)
+
+    let [value, setValue] = useState<number>(0)
+    let [maxValue, setMaxValue] = useState<number>(0)
+    let [startValue, setStartValue] = useState<number>(0)
+    const [error, setError] = useState(false)
 
 
     const increment = () => {
-        value =  startValue
-        setValue(value + 1)                     // как выводить сообщение:  enter values and press 'set' ?
-
+        setMaxValue(maxValue)
+        if (value < maxValue) {
+            setValue(value + 1)                  // как выводить сообщение:  enter values and press 'set' ?
+        }
     }
-
     const resetValue = () => {
         setValue(0)
     }
+    const setSetting = () => {
+        setStartValue(startValue)
+        value = startValue
+        setValue(value)
+        getFormLocalStorage()
+    }
 
-    let valueInputMax = maxValue;
-    console.log(valueInputMax)
-    let valueInputStart = startValue;
-    console.log(valueInputStart)
+    const getError = () => {
+    }                   //setError(error)
 
-    /*   const setToLocalStorageHandler = () => {
+    const errorIncorrectValue = ((startValue < 0) || (maxValue < 0)
+        || (startValue === maxValue))
+    const errorInputMaxValue = ((maxValue < 0) || (startValue === maxValue))
+    const errorStartValue = ((startValue < 0) || (startValue === maxValue))
+
+
+       const setToLocalStorageHandler = () => {
            localStorage.setItem('convertValue', JSON.stringify(startValue))
-           getFormLocalStorage()                            // как реализовать одной 'set' кнопкой  getSt. и setSt. ?
+           setSetting()                          // как реализовать одной 'set' кнопкой  getSt. и setSt. ?
        }
 
        const getFormLocalStorage = () => {
@@ -37,21 +49,27 @@ function App() {
                setStartValue(newValue)
            }
        }
-   */
 
 
     return (
         <div className="App">
-            <CounterSetting value={value}
-                            maxValue={maxValue}
-                            startValue={startValue}
-                            setMaxValue={setMaxValue}
-                            setStartValue={setStartValue}
-                /* setToLocalStorageHandler={setToLocalStorageHandler}*//>
+            <CounterSetting
+                maxValue={maxValue}
+                startValue={startValue}
+                setSetting={setSetting}
+                setMaxValue={setMaxValue}
+                setStartValue={setStartValue}
+                errorIncorrectValue={errorIncorrectValue}
+                errorInputMaxValue={errorInputMaxValue}
+                errorStartValue={errorStartValue}
+                 setToLocalStorageHandler={setToLocalStorageHandler}/>
             <Counter value={value}
                      maxValue={maxValue}
                      increment={increment}
                      resetValue={resetValue}
+                     errorIncorrectValue={errorIncorrectValue}
+
+
             />
         </div>
     );

@@ -1,55 +1,64 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, FocusEventHandler} from "react";
 import {Button} from "./Button";
 
 type CounterSettingPropsType = {
     /* setToLocalStorageHandler: () => void*/
-    value: number
+
     maxValue: number
     startValue: number
+    setSetting: () => void
+    setToLocalStorageHandler: () => void
     setStartValue: (value: number) => void
     setMaxValue: (value: number) => void
+    errorIncorrectValue: boolean
+    errorInputMaxValue: boolean
+    errorStartValue: boolean
 }
 
 export function CounterSetting(props: CounterSettingPropsType) {
+
+
+    let changeMaxInput = (e: ChangeEvent<HTMLInputElement>) => {
+        props.setMaxValue(+e.currentTarget.value)
+    }
     let changeStartInput = (e: ChangeEvent<HTMLInputElement>) => {
         props.setStartValue(+e.currentTarget.value)
     }
 
-    let changeMaxInput2 = (e: ChangeEvent<HTMLInputElement>) => {
-        props.setStartValue(+e.currentTarget.value)
-    }
 
 
     return (
         <div className={'container'}>
             <div className={'setting-field'}>
                 <div className={'row'}>
-                    <p>'max value :' </p>
+                    <p>max value : </p>
                     <input
-                        // className={((props.maxValue === props.startValue) || (props.maxValue < 0)) ? 'input-incorrect-value' : ''}
+                        className={props.errorInputMaxValue
+                            ? 'input-incorrect-value' : ''}
                         type="number"
-                        /*value={props.maxValue}*/
-                        onChange={changeMaxInput2}/>
+                        onChange={changeMaxInput}
+
+                    />
                 </div>
+
                 <div className={'row'}>
-                    <p>'start value :' </p>
+                    <p>start value : </p>
                     <input
-                        // className={((props.maxValue === props.startValue) || (props.maxValue < 0)) ? 'input-incorrect-value' : ''}
                         type="number"
-                        /*value={props.startValue}*/
+                        className={props.errorStartValue
+                            ? 'input-incorrect-value' : ''}
+
                         onChange={changeStartInput}
-                        />
+                    />
                 </div>
 
 
             </div>
             <div className={'button-field'}>
                 <Button title={'set'}
-                        onClick={() => {
-                        }}
-                        disabled={false}
-                    /* onClick={props.setToLocalStorageHandler}*/
-                    /*disabled={((props.maxValue < 0) && (props.startValue === props.maxValue))}*//>
+                       /* onClick={props.setSetting}*/
+                     onClick={props.setToLocalStorageHandler}
+                        disabled={props.errorIncorrectValue}/>
             </div>
         </div>
     )
