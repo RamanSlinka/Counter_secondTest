@@ -23,10 +23,10 @@ export function Counter(props: CounterPropsType) {
             <div className={'button-field'}>
                 <Button title={'inc'}
                         onClick={props.increment}
-                        disabled={props.value === props.maxValue} />
+                        disabled={props.value === props.maxValue || props.errorIncorrectValue || error} />
                 <Button title={'reset'}
                         onClick={props.resetValue}
-                        disabled={(props.errorIncorrectValue && error)}/>
+                        disabled={(props.errorIncorrectValue )}/>
             </div>
         </div>
     )

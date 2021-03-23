@@ -7,7 +7,8 @@ type CounterSettingPropsType = {
     maxValue: number
     startValue: number
     setSetting: () => void
-    setToLocalStorageHandler: () => void
+
+
     setStartValue: (value: number) => void
     setMaxValue: (value: number) => void
     errorIncorrectValue: boolean
@@ -56,8 +57,8 @@ export function CounterSetting(props: CounterSettingPropsType) {
             </div>
             <div className={'button-field'}>
                 <Button title={'set'}
-                       /* onClick={props.setSetting}*/
-                     onClick={props.setToLocalStorageHandler}
+                        onClick={props.setSetting}
+                     /*onClick={props.setToLocalStorageHandler}*/
                         disabled={props.errorIncorrectValue}/>
             </div>
         </div>

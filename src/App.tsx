@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import './App.css';
 import {Counter} from "./Counter";
@@ -6,10 +6,11 @@ import {CounterSetting} from "./CounterSetting";
 
 function App() {
 
-    let [value, setValue] = useState<number>(0)
-    let [maxValue, setMaxValue] = useState<number>(0)
-    let [startValue, setStartValue] = useState<number>(0)
-    const [error, setError] = useState(false)
+    let [value, setValue] = useState< number>(0)
+
+    let [maxValue, setMaxValue] = useState<number>(1)
+    let [startValue, setStartValue] = useState<number>(1)
+
 
 
     const increment = () => {
@@ -25,30 +26,55 @@ function App() {
         setStartValue(startValue)
         value = startValue
         setValue(value)
-        getFormLocalStorage()
+
     }
 
-    const getError = () => {
-    }                   //setError(error)
-
-    const errorIncorrectValue = ((startValue < 0) || (maxValue < 0)
-        || (startValue === maxValue))
+    const errorIncorrectValue = ((startValue < 0) || (maxValue < 0) || (startValue === maxValue))
     const errorInputMaxValue = ((maxValue < 0) || (startValue === maxValue))
     const errorStartValue = ((startValue < 0) || (startValue === maxValue))
 
+/*
+    const setToLocalStorageHandler = () => {
+        localStorage.setItem('convertValue', JSON.stringify(startValue))
+        setSetting()
+    }
 
-       const setToLocalStorageHandler = () => {
-           localStorage.setItem('convertValue', JSON.stringify(startValue))
-           setSetting()                          // как реализовать одной 'set' кнопкой  getSt. и setSt. ?
-       }
+    const getFormLocalStorage = () => {
+        let minValueAsString = localStorage.getItem('minValueAsString')
+        let maxValueAsString = localStorage.getItem('maxValueAsString')
+        if (minValueAsString && maxValueAsString) {
+            let newMinValue = JSON.parse(minValueAsString)
+            let newMaxValue = JSON.parse(maxValueAsString)
+            setStartValue(newMinValue && newMaxValue)
+        }
+    }
 
-       const getFormLocalStorage = () => {
-           let valueAsString = localStorage.getItem('convertValue')
-           if (valueAsString) {
-               let newValue = JSON.parse(valueAsString)
-               setStartValue(newValue)
-           }
-       }
+    useEffect(() => {
+        localStorage.setItem('maxValue', JSON.stringify(maxValue))
+    }, [ maxValue])
+
+    useEffect(() => {
+        let minValueAsString = localStorage.getItem('minValueAsString')
+        if (minValueAsString ) {
+            let newMinValue = JSON.parse(minValueAsString)
+            setStartValue(newMinValue)
+        }
+    },[])
+
+
+    useEffect(()=> {
+        localStorage.setItem('startValue', JSON.stringify(startValue))
+    },[startValue])
+
+    useEffect(() => {
+        let maxValueAsString = localStorage.getItem('maxValueAsString')
+        if ( maxValueAsString) {
+            let newMaxValue = JSON.parse(maxValueAsString)
+            setStartValue( newMaxValue)
+        }
+    },[])*/
+
+
 
 
     return (
@@ -62,7 +88,8 @@ function App() {
                 errorIncorrectValue={errorIncorrectValue}
                 errorInputMaxValue={errorInputMaxValue}
                 errorStartValue={errorStartValue}
-                 setToLocalStorageHandler={setToLocalStorageHandler}/>
+
+                /*setToLocalStorageHandler={setToLocalStorageHandler}*//>
             <Counter value={value}
                      maxValue={maxValue}
                      increment={increment}
