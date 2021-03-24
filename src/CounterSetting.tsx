@@ -1,14 +1,13 @@
 import React, {ChangeEvent, FocusEventHandler} from "react";
 import {Button} from "./Button";
 
-type CounterSettingPropsType = {
-    /* setToLocalStorageHandler: () => void*/
 
+
+type CounterSettingPropsType = {
     maxValue: number
     startValue: number
     setSetting: () => void
-
-
+    setError: (value: boolean) => void
     setStartValue: (value: number) => void
     setMaxValue: (value: number) => void
     errorIncorrectValue: boolean
@@ -18,6 +17,9 @@ type CounterSettingPropsType = {
 
 export function CounterSetting(props: CounterSettingPropsType) {
 
+    let errorHandler = (e: FocusEventHandler<HTMLInputElement>) => {
+        props.setError(e.currentTarget.value)
+    }
 
     let changeMaxInput = (e: ChangeEvent<HTMLInputElement>) => {
         props.setMaxValue(+e.currentTarget.value)
@@ -38,6 +40,7 @@ export function CounterSetting(props: CounterSettingPropsType) {
                             ? 'input-incorrect-value' : ''}
                         type="number"
                         onChange={changeMaxInput}
+                        onBlur={errorHandler}
 
                     />
                 </div>
@@ -48,8 +51,8 @@ export function CounterSetting(props: CounterSettingPropsType) {
                         type="number"
                         className={props.errorStartValue
                             ? 'input-incorrect-value' : ''}
-
                         onChange={changeStartInput}
+                        onBlur={errorHandler}
                     />
                 </div>
 

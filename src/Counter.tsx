@@ -4,6 +4,7 @@ import {Button} from "./Button";
 
 type CounterPropsType = {
     value: number
+    errorValue: string
     maxValue: number
     increment: () => void
     resetValue: () => void
@@ -18,7 +19,7 @@ export function Counter(props: CounterPropsType) {
     return (
         <div className={'container'}>
             <div className={'setting-field'}>
-                <h2 className={error ? 'red' : ''}>{props.value}</h2>
+                <h2 className={error ? 'red' : ''}>{props.value || props.errorValue}</h2>
             </div>
             <div className={'button-field'}>
                 <Button title={'inc'}
@@ -26,7 +27,7 @@ export function Counter(props: CounterPropsType) {
                         disabled={props.value === props.maxValue || props.errorIncorrectValue || error} />
                 <Button title={'reset'}
                         onClick={props.resetValue}
-                        disabled={(props.errorIncorrectValue )}/>
+                        disabled={(props.errorIncorrectValue)}/>
             </div>
         </div>
     )
