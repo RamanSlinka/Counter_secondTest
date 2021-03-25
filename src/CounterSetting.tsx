@@ -1,24 +1,24 @@
-import React, {ChangeEvent, FocusEventHandler} from "react";
+import React, {ChangeEvent} from "react";
 import {Button} from "./Button";
-
 
 
 type CounterSettingPropsType = {
     maxValue: number
     startValue: number
     setSetting: () => void
-    setError: (value: boolean) => void
     setStartValue: (value: number) => void
     setMaxValue: (value: number) => void
     errorIncorrectValue: boolean
     errorInputMaxValue: boolean
     errorStartValue: boolean
+    setIsSettings: any
 }
 
 export function CounterSetting(props: CounterSettingPropsType) {
 
-    let errorHandler = (e: FocusEventHandler<HTMLInputElement>) => {
-        props.setError(e.currentTarget.value)
+    let setIsSettings = () => {
+        debugger
+        props.setIsSettings(true)
     }
 
     let changeMaxInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +28,7 @@ export function CounterSetting(props: CounterSettingPropsType) {
         props.setStartValue(+e.currentTarget.value)
     }
 
-
+    debugger
 
     return (
         <div className={'container'}>
@@ -40,8 +40,8 @@ export function CounterSetting(props: CounterSettingPropsType) {
                             ? 'input-incorrect-value' : ''}
                         type="number"
                         onChange={changeMaxInput}
-                        onBlur={errorHandler}
-
+                        value={props.maxValue}
+                        onFocus={setIsSettings}
                     />
                 </div>
 
@@ -52,7 +52,8 @@ export function CounterSetting(props: CounterSettingPropsType) {
                         className={props.errorStartValue
                             ? 'input-incorrect-value' : ''}
                         onChange={changeStartInput}
-                        onBlur={errorHandler}
+                        value={props.startValue}
+                        onFocus={setIsSettings}
                     />
                 </div>
 
@@ -61,7 +62,6 @@ export function CounterSetting(props: CounterSettingPropsType) {
             <div className={'button-field'}>
                 <Button title={'set'}
                         onClick={props.setSetting}
-                     /*onClick={props.setToLocalStorageHandler}*/
                         disabled={props.errorIncorrectValue}/>
             </div>
         </div>
