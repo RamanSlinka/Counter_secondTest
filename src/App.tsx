@@ -14,15 +14,6 @@ function App() {
 
 
     const increment = () => {
-        // setMaxValue(maxValue)
-        // if (errorIncorrectValue) {
-        //     return errorValue
-        // } else if (!error) {
-        //     return  enterValue
-        // }                                   // как выводить сообщение:  enter values and press 'set' ?
-        // else if (value < maxValue) {
-        //     setValue(value + 1)
-       // }
         setValue(value + 1)
     }
 
@@ -41,9 +32,10 @@ function App() {
 
     const errorValue = 'Incorrect value!'
     const enterValue = 'enter values and press set ?'
-    const errorIncorrectValue = ((startValue < 0) || (maxValue < 0) || (startValue === maxValue))
-    const errorInputMaxValue = ((maxValue < 0) || (startValue === maxValue))
-    const errorStartValue = ((startValue < 0) || (startValue === maxValue))
+    const errorIncorrectValue = ((startValue < 0) || (maxValue < 0)
+        || (startValue === maxValue) || (startValue > maxValue))
+    const errorInputMaxValue = ((maxValue < 0) || ((startValue === maxValue) && (maxValue !== 0)))
+    const errorStartValue = ((startValue < 0) || ((startValue === maxValue) && (startValue !== 0)))
 
 
 
@@ -80,7 +72,6 @@ function App() {
                 setSetting={setSetting}
                 setMaxValue={setMaxValue}
                 setStartValue={setStartValue}
-               /* setError={setError}*/
                 errorIncorrectValue={errorIncorrectValue}
                 errorInputMaxValue={errorInputMaxValue}
                 errorStartValue={errorStartValue}
@@ -88,6 +79,7 @@ function App() {
 
                />
             <Counter value={value}
+                     startValue={startValue}
                      errorValue={errorValue}
                      enterValue={enterValue}
                      maxValue={maxValue}

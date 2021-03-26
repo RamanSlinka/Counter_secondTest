@@ -4,6 +4,7 @@ import {Button} from "./Button";
 
 type CounterPropsType = {
     value: number
+    startValue: number
     errorValue: string
     enterValue: string
     maxValue: number
@@ -14,36 +15,31 @@ type CounterPropsType = {
 }
 
 
-
 export function Counter(props: CounterPropsType) {
 
-    let valueSelection = () => {
-        if (props.isSettings ) {
-            return  props.enterValue
-        } else if (props.errorIncorrectValue ) {
+    const displayValue = () => {
+        if (props.errorIncorrectValue) {
             return props.errorValue
+        } else if (props.isSettings){
+            return  props.enterValue
         } else {
-            return  props.value
+            return props.value || props.startValue
         }
     }
 
-
-
     const error = (props.value === props.maxValue)
+
     return (
         <div className={'container'}>
             <div className={'setting-field'}>
-                <h2 className={error ? 'red' : ''}>
-                    {valueSelection}
-                    {/*{props.isSettings ? props.enterValue : props.value}*/}
-                   {/* {props.isSettings ? props.errorIncorrectValue : props.value}*/}
-                    {/*{props.value || props.errorValue || props.enterValue}*/}
+                <h2 className={(error && !props.isSettings)? 'red' : ''}>
+                    {displayValue()}
                 </h2>
             </div>
             <div className={'button-field'}>
                 <Button title={'inc'}
                         onClick={props.increment}
-                        disabled={props.value === props.maxValue || props.errorIncorrectValue || error} />
+                        disabled={props.value === props.maxValue || props.errorIncorrectValue || error}/>
                 <Button title={'reset'}
                         onClick={props.resetValue}
                         disabled={(props.errorIncorrectValue)}/>
